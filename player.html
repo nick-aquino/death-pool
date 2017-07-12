@@ -56,20 +56,20 @@
 ">
   <div class="container player-header">
     <div class="row center-row align-middle">
-      <div class="col-xs-4">1st</div>
-      <div class="col-xs-4"><img src="characters/bronn-512x512.jpg" class="img-circle img-responsive" alt="Bronn"></div>
-      <div class="col-xs-4">25pts</div>
+      <div class="col-xs-4">2nd</div>
+      <div class="col-xs-4"><img src="characters/cersei-lannister-512x512.jpg" class="img-circle img-responsive" alt="Bronn"></div>
+      <div class="col-xs-4">20pts</div>
     </div>
   </div>
 
   <div>
     <!-- Default panel contents -->
 
-    <table data-link="row" class="table table-hover">
+    <table class="table">
       <thead>
         <tr>
           <th>#</th>
-          <th>Player</th>
+          <th>Character</th>
           <th></th>
           <th>Points</th>
         </tr>
@@ -87,7 +87,7 @@
           <td>Cersei Lannister</td>
           <td>20</td>
         </tr>
-        <tr>
+        <tr class="list-group-item-success">
           <th scope="row">3</th>
           <td><img src="characters/jaime-lannister-512x512.jpg" class="img-circle" alt="Bronn"></td>
           <td>Jaime Lannister</td>
@@ -99,7 +99,7 @@
           <td>Jorah Mormont</td>
           <td>10</td>
         </tr>
-        <tr>
+        <tr class="list-group-item-success">
           <th scope="row">5</th>
           <td><img src="characters/melisandre-512x512.jpg" class="img-circle" alt="Bronn"></td>
           <td>Melisandre</td>
@@ -116,9 +116,6 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
   <script>
     window.jQuery || document.write('<script src="js/vendor/jquery.min.js"><\/script>')
-    $('.table > tbody > tr').click(function() {
-      window.location = "player.html"
-    });
   </script>
   <script src="js/bootstrap.min.js"></script>
 </body>
