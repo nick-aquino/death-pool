@@ -1,0 +1,36 @@
+[debug] [2017-07-13T15:55:56.552Z] ----------------------------------------------------------------------
+[debug] [2017-07-13T15:55:56.555Z] Command:      /Users/nick/.nvm/versions/node/v7.10.0/bin/node /Users/nick/.nvm/versions/node/v7.10.0/bin/firebase serve -o 192.168.86.207
+[debug] [2017-07-13T15:55:56.555Z] CLI Version:  3.9.1
+[debug] [2017-07-13T15:55:56.555Z] Platform:     darwin
+[debug] [2017-07-13T15:55:56.555Z] Node Version: v7.10.0
+[debug] [2017-07-13T15:55:56.556Z] Time:         Thu Jul 13 2017 11:55:56 GMT-0400 (EDT)
+[debug] [2017-07-13T15:55:56.556Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2017-07-13T15:55:56.567Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2017-07-13T15:55:56.567Z] > authorizing via signed-in user
+[debug] [2017-07-13T15:55:56.569Z] > refreshing access token with scopes: ["email","https://www.googleapis.com/auth/cloud-platform","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","openid"]
+[debug] [2017-07-13T15:55:56.569Z] >>> HTTP REQUEST POST https://www.googleapis.com/oauth2/v3/token { refresh_token: '1/1fLqYZcz31totXqONy2VJr7kG3orJ_-K2TSIuEVLx68PUxp0cXP1KZJA4f2bf5se',
+  client_id: '563584335869-fgrhgmd47bqnekij5i8b5pr03ho849e6.apps.googleusercontent.com',
+  client_secret: 'j9iVZfS8kkCEFUPaAeJV0sAi',
+  grant_type: 'refresh_token',
+  scope: 'email https://www.googleapis.com/auth/cloud-platform https://www.googleapis.com/auth/cloudplatformprojects.readonly https://www.googleapis.com/auth/firebase openid' } 
+ Thu Jul 13 2017 11:55:56 GMT-0400 (EDT)
+[debug] [2017-07-13T15:55:57.807Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-13T15:55:57.821Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/projects/death-pool  
+ Thu Jul 13 2017 11:55:57 GMT-0400 (EDT)
+[debug] [2017-07-13T15:55:58.276Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-13T15:55:58.278Z] >>> HTTP REQUEST GET https://admin.firebase.com/v1/database/death-pool/tokens  
+ Thu Jul 13 2017 11:55:58 GMT-0400 (EDT)
+[debug] [2017-07-13T15:55:58.688Z] <<< HTTP RESPONSE 200
+[info] 
+[info] === Serving from '/Users/nick/workspace/death-pool'...
+[info] 
+[debug] [2017-07-13T15:55:58.691Z] >>> HTTP REQUEST GET https://cloudresourcemanager.googleapis.com/v1/projects/death-pool  
+ Thu Jul 13 2017 11:55:58 GMT-0400 (EDT)
+[debug] [2017-07-13T15:55:59.081Z] <<< HTTP RESPONSE 200
+[debug] [2017-07-13T15:55:59.082Z] >>> HTTP REQUEST GET https://mobilesdk-pa.googleapis.com/v1/projects/789319593180/clients/_:getWebAppConfig  
+ Thu Jul 13 2017 11:55:59 GMT-0400 (EDT)
+[debug] [2017-07-13T15:55:59.554Z] <<< HTTP RESPONSE 200
+[info] i  hosting: Serving hosting files from: public
+[info] ✔  hosting: Local server: http://192.168.86.207:5000
+

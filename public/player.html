@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <base href="/">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Starter Template for Bootstrap</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/custom.css" rel="stylesheet">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/angular.min.js"></script>
+
+
+  <script src="https://www.gstatic.com/firebasejs/4.1.3/firebase.js"></script>
+  <script src="js/custom.js"></script>
+</head>
+
+<body ng-app="myApp" ng-controller="GreetingController" ng-init="initUser()">
+  <div id="mySidenav" class="sidenav">
+    <a href="javascript:void(0)" class="closebtn" ng-click="closeNav()">&times;</a>
+    <a ng-click="goto('player.html')" href="player.html">Me</a>
+    <a ng-click="goto('index.html')" href="index.html">Friends</a>
+    <a ng-click="goto('characters.html')" href="characters.html">Characters</a>
+    <a ng-click="logout()" href="#">Logout</a>
+  </div>
+  <span ng-click="openNav()" class="glyphicon glyphicon-menu-hamburger menubutton" aria-hidden="true"></span>
+  <div class="container player-header">
+    <div class="row center-row align-middle">
+      <div class="col-xs-4"><div>{{position}}</div><div>Position</div></div>
+      <div class="col-xs-4"><img ng-src="{{image ? image : 'characters/ironthrone-compressed.jpg'}}" class="img-circle img-responsive"></div>
+      <div class="col-xs-4"><div>{{points}}</div><div>Points</div></div>
+    </div>
+  </div>
+
+  <div>
+    <!-- Default panel contents -->
+
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="list-number">#</th>
+          <th class="list-image">Character</th>
+          <th class="list-name"></th>
+          <th>Points</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr ng-class="{'list-group-item-success': char.dead}" ng-repeat="(idx,char) in userChars">
+          <th scope="row">{{idx + 1}}</th>
+          <td><img ng-src="characters/{{char.image}}" class="img-circle"></td>
+          <td>{{char.name}}</td>
+          <td>{{30-((idx + 1)*5)}}</td>
+        </tr>
+      </tbody>
+    </table>
+      <div ng-if="!userChars" class="loader"></div>
+  </div>
+</body>
+
+</html>
