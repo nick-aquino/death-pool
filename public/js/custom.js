@@ -9,16 +9,32 @@ var config = {
 };
 firebase.initializeApp(config);
 
-var myApp = angular.module('myApp',[]);
+var myApp = angular.module('myApp',['ui.sortable']);
 myApp.config(['$locationProvider', function($locationProvider){
     $locationProvider.html5Mode(true);
 }]);
 myApp.controller('GreetingController', ['$scope', '$location',function($scope,$location,$document) {
+
+  $scope.sortableOptions = {
+    handle: '> .drag-handle',
+    disabled: true,
+    axis: 'y',
+    stop: function(e, ui) {
+      var listRef = firebase.database().ref('/users').child($scope.uid).child('list');
+      listRef.set($scope.userChars.map(function(char) {return char.key;}));
+    }
+  };
   initApp = function() {
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
+        var photolink;
+        if (user.providerData[0].photoURL){
+          photolink = user.providerData[0].photoURL;
+        } else {
+          photolink = 'characters/ironthrone-compressed.jpg';
+        }
         user.updateProfile({
-          photoURL: user.providerData[0].photoURL
+          photoURL: photolink
         })
         // User is signed in.
         $scope.displayName = user.displayName;
@@ -37,9 +53,8 @@ myApp.controller('GreetingController', ['$scope', '$location',function($scope,$l
             userObj[user.uid] = {
               name: user.displayName,
               points: 0,
-              position: 3,
-              image:user.photoURL,
-              list:[12]
+              position: 1,
+              image:user.photoURL
             };
             usersRef.update(userObj)
           }
@@ -62,6 +77,10 @@ myApp.controller('GreetingController', ['$scope', '$location',function($scope,$l
       Object.keys(users.val()).forEach(function(key) {
         var user = users.val()[key];
         user.key = key;
+        if (key == $scope.uid){
+          $scope.position = user.position;
+          $scope.points = user.points;
+        }
         $scope.users.push(user)
       });
       $scope.$apply();
@@ -92,22 +111,56 @@ myApp.controller('GreetingController', ['$scope', '$location',function($scope,$l
     getUsers();
   };
 
+  $scope.editable = function() {
+    var userid = $location.search().user;
+    if (userid == $scope.uid){
+      $scope.sortableOptions.disabled = false;
+      return true;
+    }
+  }
+
   $scope.initUser = function() {
     var userid = $location.search().user;
     return firebase.database().ref('/users').once('value').then(function(users) {
         return firebase.database().ref('/characters').once('value').then(function(characters) {
+          $scope.characters = characters.val();
           $scope.userChars = [];
           var user = users.val()[userid];
           $scope.points = user.points;
           $scope.position = user.position;
           $scope.image = user.image;
+          if (!user.list) {
+            user.list = [];
+          }
           user.list.forEach(function(item,idx) {
             var char =characters.val()[item];
+            char.key = item;
             $scope.userChars.push(char);
           });
           $scope.$apply();
         });
     });
+  };
+
+  $scope.currentList = function(){return $scope.userChars.map(function(char) {return char.key;})};
+
+  $scope.add = function(key,char) {
+    var currentList = $scope.userChars.map(function(char) {return char.key;});
+    if (currentList.includes(key)) {
+      alert('already added');
+      return;
+    }
+    char.key = key;
+    $scope.userChars.push(char);
+    $('#myModal').modal('hide');
+    var listRef = firebase.database().ref('/users').child($scope.uid).child('list');
+    listRef.set($scope.userChars.map(function(char) {return char.key;}));
+  };
+
+  $scope.remove = function(key) {
+    $scope.userChars.splice( key, 1 );
+    var listRef = firebase.database().ref('/users').child($scope.uid).child('list');
+    listRef.set($scope.userChars.map(function(char) {return char.key;}));
   };
 
   $scope.initCharacters = function() {
@@ -125,11 +178,13 @@ myApp.controller('GreetingController', ['$scope', '$location',function($scope,$l
   /* Set the width of the side navigation to 250px and the left margin of the page content to 250px and add a black background color to body */
   $scope.openNav = function() {
       document.getElementById("mySidenav").style.width = "250px";
+      $scope.overlay = true;
   }
 
   /* Set the width of the side navigation to 0 and the left margin of the page content to 0, and the background color of body to white */
   $scope.closeNav = function() {
       document.getElementById("mySidenav").style.width = "0";
+      $scope.overlay = false;
   }
 
 }]);

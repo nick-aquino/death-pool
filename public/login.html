@@ -21,6 +21,7 @@
 
       <script src="https://cdn.firebase.com/libs/firebaseui/2.2.1/firebaseui.js"></script>
       <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.2.1/firebaseui.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
       <script type="text/javascript">
         // FirebaseUI config.
         var uiConfig = {
@@ -41,12 +42,17 @@
       </script>
   </head>
   <body>
-    <!-- The surrounding HTML is left untouched by FirebaseUI.
-         Your app may use that space for branding, controls and other customizations.-->
-    <h1 class="align-middle" style="color:black">GoT Death Pool</h1>
-    <div id="firebaseui-auth-container"></div>
+  <div class="container" style="padding-top:60px;position:absolute;top:0;bottom:0;right:0;left:0">
+    <div class="jumbotron" style="padding-bottom:120px;">
+        <!-- The surrounding HTML is left untouched by FirebaseUI.
+             Your app may use that space for branding, controls and other customizations.-->
+        <h1 class="text-center" style="padding-top:60px">Game of Thrones</h1>
+        <h2 class="text-center">Death Pool</h2>
+        <div id="firebaseui-auth-container"></div>
 
-    <div id="sign-in"></div>
-    <div id="account-details"></div>
+        <div id="sign-in"></div>
+        <div id="account-details"></div>
+</div>
+</div>
   </body>
 </html>
