@@ -56,16 +56,34 @@
           <th class="list-number">#</th>
           <th class="list-image">Character</th>
           <th class="list-name"></th>
+            <th>Players</th>
             <th></th>
         </tr>
       </thead>
       <tbody>
-        <tr ng-class="{'list-group-item-danger': char.dead}" ng-repeat="(idx,char) in characters">
+        <tr ng-class="{'list-group-item-danger': char.dead}" ng-repeat="(idx,char) in characters | orderBy:getPicks:true">
           <td></td>
-          <th scope="row">{{idx + 1}}</th>
-          <td><img ng-src="characters/{{char.image}}" class="img-circle"></td>
-          <td>{{char.name}}</td>
-            <td></td>
+          <th class="list-number" scope="row">{{idx + 1}}</th>
+          <td class="list-image"><img ng-src="characters/{{char.image}}" class="img-circle"></td>
+          <td class="list-name">{{char.name}}</td>
+            <td>
+              <div class="dropdown">
+                <button ng-if="picks[char.key].length > 0" class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu{{idx}}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                  {{getPicks(char)}}
+                  <span class="caret"></span>
+                </button>
+                <ul ng-if="picks[char.key].length > 0" class="dropdown-menu dropdown-menu-right" aria-labelledby="dropdownMenu{{idx}}">
+                  <li ng-repeat-start="user in picks[char.key]">
+                    <a ng-click="go(user.key)" href="#">
+                      <img ng-src="{{user.image}}" class="list-image-sm img-circle">
+                      {{user.name}}
+                    </a>
+                  </li>
+                  <li ng-repeat-end ng-if="!$last" role="separator" class="divider"></li>
+                </ul>
+              </div>
+          </td>
+          <td></td>
         </tr>
       </tbody>
     </table>

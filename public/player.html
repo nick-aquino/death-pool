@@ -29,7 +29,7 @@
 </head>
 
 <body ng-class="{'no-scroll':overlay}" ng-app="myApp" ng-controller="GreetingController" ng-init="initUser()">
-  
+
   <div id="mySidenav" class="sidenav">
     <a ng-click="go(uid)" href="player.html">My Picks</a>
     <a ng-click="goto('index.html')" href="index.html">Leaderboard</a>
@@ -57,7 +57,7 @@
           <th class="list-number">#</th>
           <th class="list-image">Character</th>
           <th class="list-name"></th>
-          <th>Points</th>
+          <th class="list-points">Points</th>
           <th></th>
         </tr>
       </thead>
@@ -67,7 +67,7 @@
           <th class="drag-handle list-number" scope="row">{{idx + 1}}</th>
           <td class="drag-handle list-image"><img ng-src="characters/{{char.image}}" class="img-circle"></td>
           <td class="drag-handle list-name">{{char.name}}</td>
-          <td>{{30-((idx + 1)*5)}}</td>
+          <td class="drag-handle list-points">{{30-((idx + 1)*5)}}</td>
           <td><button ng-if="editable()" type="button" class="btn-remove" ng-click="remove(idx)"><i class="glyphicon glyphicon-trash"></i></button></td>
         </tr>
 

@@ -51,11 +51,20 @@ td img {
 .list-number {
   width: 50px;
 }
+.list-delete {
+  width: 20px;
+}
+.list-points {
+  width: 60px;
+}
 .list-image {
   width: 85px;
 }
 .list-name {
   width: 70%;
+}
+.list-image-sm {
+  height: 32px;
 }
 
 .nav-overlay {
@@ -73,6 +82,11 @@ td img {
   float: left;
   padding: 20px;
   cursor: pointer;
+    z-index: 1;
+}
+
+.dropdown {
+  display: inline-block;
 }
 
 @media (max-width: 800px) {
@@ -82,8 +96,6 @@ td img {
   font-size: 20px;
   float: left;
   padding: 15px;
-    padding-bottom: 30px;
-    padding-right: 30px;
 }
 }
 

@@ -65,9 +65,9 @@
       <tbody>
         <tr ng-click="go(user.key)" ng-repeat="user in users | orderBy:'position'">
           <td></td>
-          <th scope="row">{{user.position}}</th>
-          <td><img ng-src="{{user.image}}" class="img-circle"></td>
-          <td>{{user.name}}</td>
+          <th class="list-number" scope="row">{{user.position}}</th>
+          <td class="list-image"><img ng-src="{{user.image}}" class="img-circle"></td>
+          <td class="list-name">{{user.name}}</td>
           <td>{{user.points}}</td>
             <td></td>
         </tr>

@@ -14,7 +14,6 @@ myApp.config(['$locationProvider', function($locationProvider){
     $locationProvider.html5Mode(true);
 }]);
 myApp.controller('GreetingController', ['$scope', '$location',function($scope,$location,$document) {
-
   $scope.sortableOptions = {
     handle: '> .drag-handle',
     disabled: true,
@@ -91,7 +90,9 @@ myApp.controller('GreetingController', ['$scope', '$location',function($scope,$l
     $scope.alive = 0;
     return firebase.database().ref('/characters').once('value').then(function(characters) {
       $scope.characters = characters.val();
-      $scope.characters.forEach(function(char) {
+      Object.keys($scope.characters).forEach(function(key) {
+        var char = $scope.characters[key];
+        $scope.characters[key]["key"] = key;
         if (char.dead){
           $scope.dead = $scope.dead+1;
         }
@@ -112,6 +113,9 @@ myApp.controller('GreetingController', ['$scope', '$location',function($scope,$l
   };
 
   $scope.editable = function() {
+    if (!$scope.isEditable) {
+      return false;
+    }
     var userid = $location.search().user;
     if (userid == $scope.uid){
       $scope.sortableOptions.disabled = false;
@@ -126,6 +130,7 @@ myApp.controller('GreetingController', ['$scope', '$location',function($scope,$l
           $scope.characters = characters.val();
           $scope.userChars = [];
           var user = users.val()[userid];
+          $scope.isEditable = users.val()["editable"];
           $scope.points = user.points;
           $scope.position = user.position;
           $scope.image = user.image;
@@ -163,8 +168,39 @@ myApp.controller('GreetingController', ['$scope', '$location',function($scope,$l
     listRef.set($scope.userChars.map(function(char) {return char.key;}));
   };
 
+  countPicks = function() {
+    $scope.picks = {};
+    return firebase.database().ref('/users').once('value').then(function(users) {
+      Object.keys(users.val()).forEach(function(key) {
+        if(key == "editable"){
+          return;
+        }
+        var user = users.val()[key];
+        if (!user.list) {
+          user.list = [];
+        }
+        user.key = key;
+        user.list.forEach(function(item,idx) {
+          if (item in $scope.picks) {
+            $scope.picks[item].push(user);
+          } else {
+            $scope.picks[item] = [user];
+          }
+        });
+      });
+      $scope.$apply();
+      $('[data-toggle="popover"]').popover()
+    });
+  }
+
+  $scope.getPicks = function(char) {
+     if ($scope.picks[char.key]) return $scope.picks[char.key].length;
+     return 0;
+  };
+
   $scope.initCharacters = function() {
     getCharacters();
+    countPicks();
   }
 
   $scope.go = function(user) {
@@ -187,4 +223,18 @@ myApp.controller('GreetingController', ['$scope', '$location',function($scope,$l
       $scope.overlay = false;
   }
 
-}]);
+}]).directive('popover', function($compile, $timeout){
+  return {
+    restrict: 'A',
+    link:function(scope, el, attrs){
+      var content = attrs.content;
+      var elm = angular.element('<div />');
+      elm.append(attrs.content);
+      $compile(elm)(scope);
+      $timeout(function() {
+        el.removeAttr('popover').attr('data-content',elm.html());
+        el.popover();
+       });
+    }
+  }
+});
