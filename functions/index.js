@@ -26,9 +26,6 @@ exports.countlikechange = functions.database.ref('/characters/{charid}/dead').on
           var usersArr = [];
           var newUsers = users.val();
           Object.keys(newUsers).forEach(function(key) {
-            if(key == "editable"){
-              return;
-            }
             var user = newUsers[key];
             var points = 0;
             if (!user.list) {

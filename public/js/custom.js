@@ -125,12 +125,13 @@ myApp.controller('GreetingController', ['$scope', '$location',function($scope,$l
 
   $scope.initUser = function() {
     var userid = $location.search().user;
-    return firebase.database().ref('/users').once('value').then(function(users) {
-        return firebase.database().ref('/characters').once('value').then(function(characters) {
-          $scope.characters = characters.val();
+    return firebase.database().ref('/').once('value').then(function(db) {
+          var users = db.val().users;
+          var characters = db.val().characters;
+          $scope.characters = characters;
           $scope.userChars = [];
-          var user = users.val()[userid];
-          $scope.isEditable = users.val()["editable"];
+          var user = users[userid];
+          $scope.isEditable = db.val().editable|| user.editOverride;
           $scope.points = user.points;
           $scope.position = user.position;
           $scope.image = user.image;
@@ -138,12 +139,11 @@ myApp.controller('GreetingController', ['$scope', '$location',function($scope,$l
             user.list = [];
           }
           user.list.forEach(function(item,idx) {
-            var char =characters.val()[item];
+            var char =characters[item];
             char.key = item;
             $scope.userChars.push(char);
           });
           $scope.$apply();
-        });
     });
   };
 
@@ -172,9 +172,6 @@ myApp.controller('GreetingController', ['$scope', '$location',function($scope,$l
     $scope.picks = {};
     return firebase.database().ref('/users').once('value').then(function(users) {
       Object.keys(users.val()).forEach(function(key) {
-        if(key == "editable"){
-          return;
-        }
         var user = users.val()[key];
         if (!user.list) {
           user.list = [];

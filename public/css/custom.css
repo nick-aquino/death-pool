@@ -1,10 +1,22 @@
-
-td img {
+td .img-circle {
   height: 64px;
+  width: 64px;
 }
 
 .list-item-plain {
   background-color: white;
+}
+
+.img-large-dynamic {
+  height: 23vw;
+  width: 23vw;
+}
+
+.img-circle {
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  border-radius: 50%;
 }
 
 .btn-circle {
@@ -63,8 +75,9 @@ td img {
 .list-name {
   width: 70%;
 }
-.list-image-sm {
+.img-circle.list-image-sm {
   height: 32px;
+    width: 32px;
 }
 
 .nav-overlay {
@@ -113,14 +126,15 @@ td img {
 }
 
 .player-header {
-  background-color: #337ab7;
-  border-color: #337ab7;
+  background-color: #333333;
+  border-color: #333333;
   width: 100%;
   max-height: 400px;
 }
 
 .player-header img{
   max-height: 360px;
+  max-width: 360px;
   margin: 0 auto
 }
 
@@ -134,8 +148,8 @@ body.no-scroll { /* ...or body.dialogShowing */
   position: fixed;
   z-index: 2;
   top: 0;
-  left: 0;
-  background-color: white;
+  left: -2px;
+  background-color: #474747;
   overflow-x: hidden;
   transition: 0.2s;
   padding-top: 20px;
@@ -150,7 +164,7 @@ body.no-scroll { /* ...or body.dialogShowing */
     padding: 8px 8px 8px 32px;
     text-decoration: none;
     font-size: 25px;
-    color: #818181;
+    color: #a7a7a7;;
     display: block;
     transition: 0.2s;
 }

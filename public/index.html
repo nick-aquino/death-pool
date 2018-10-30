@@ -10,7 +10,7 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>Starter Template for Bootstrap</title>
+  <title>GoT Death Pool - Leaderboard</title>
 
   <!-- Bootstrap core CSS -->
   <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -42,9 +42,9 @@
 
   <div class="container player-header">
     <div class="row center-row align-middle">
-      <div class="col-xs-4"><div>{{position}}</div><div>Position</div></div>
-      <div class="col-xs-4"><img ng-src="{{photoURL ? photoURL : 'characters/ironthrone-compressed.jpg'}}" class="img-circle img-responsive" alt="Bronn"></div>
-      <div class="col-xs-4"><div>{{points}}</div><div>Points</div></div>
+      <div class="col-xs-6"><div>{{position}}</div><div>Place</div></div>
+      <div class="img-col"><img ng-src="{{photoURL ? photoURL : 'characters/ironthrone-compressed.jpg'}}" class="img-circle img-large-dynamic"></div>
+      <div class="col-xs-6"><div>{{points}}</div><div>Points</div></div>
     </div>
   </div>
 
@@ -66,7 +66,7 @@
         <tr ng-click="go(user.key)" ng-repeat="user in users | orderBy:'position'">
           <td></td>
           <th class="list-number" scope="row">{{user.position}}</th>
-          <td class="list-image"><img ng-src="{{user.image}}" class="img-circle"></td>
+          <td class="list-image"><div style="background-image: url({{user.image}})" class="img-circle"/></td>
           <td class="list-name">{{user.name}}</td>
           <td>{{user.points}}</td>
             <td></td>
