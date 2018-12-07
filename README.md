@@ -15,7 +15,8 @@ height="640" border="10" />
 * Displays selected player roster and points
 * Indicates characters who have died with red background
 
-
+<img src="http://knickj.com:8080/img/death-pool/examples/player.png" 
+height="640" border="10" />
 
 ## Player Edit
 * Displays current player roster
