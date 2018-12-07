@@ -9,21 +9,20 @@
 * Links to each players roster
 
 <img src="http://knickj.com:8080/img/death-pool/examples/leaderboard.png" 
-alt="IMAGE ALT TEXT HERE" height="640" border="10" />
+height="640" border="10" />
 
 ## Player
 * Displays selected player roster and points
 * Indicates characters who have died with red background
 
-<img src="http://knickj.com:8080/img/death-pool/examples/player.png" 
-alt="IMAGE ALT TEXT HERE" height="640" border="10" />
+
 
 ## Player Edit
 * Displays current player roster
 * Provides buttons for Adding and Removing characters from roster
 
 <img src="http://knickj.com:8080/img/death-pool/examples/player_edit.png" 
-alt="IMAGE ALT TEXT HERE" height="640" border="10" />
+height="640" border="10" />
 
 ## Characters
 * Lists all characters (in db) from show
@@ -31,4 +30,4 @@ alt="IMAGE ALT TEXT HERE" height="640" border="10" />
 * Provides drop down to see which users selected that character
 
 <img src="http://knickj.com:8080/img/death-pool/examples/characters.png" 
-alt="IMAGE ALT TEXT HERE" height="640" border="10" />
+height="640" border="10" />
